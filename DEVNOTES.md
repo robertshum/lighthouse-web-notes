@@ -5,7 +5,7 @@ Arrays and string arrays are similar but not all array methods work.  For exampl
 Push adds an element to an array.
 Shift removes first element from array and returns that element.  The original array is modified.
 
-However, we can do something similar for string arrays:
+However, we can do something similar for string
 
 ```javascript
 let word = "hello";
