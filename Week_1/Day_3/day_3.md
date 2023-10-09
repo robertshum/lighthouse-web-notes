@@ -76,3 +76,22 @@ for (var planet in planetMoons) {
   }
 }
 ```
+
+
+### Learning more about truthy and falsy
+
+undefined === false or undefined == true will always be false.  This is because they are explicity different objects and no coercion can be done.
+
+0 === false is false because of strict comp., but 0 == false is true because numbers have inherit truth/false values.
+
+HOWEVER, undefined can still be evaulated in conditional statements (if, while, etc.) as "FALSY".  The `test["new"]` will result in false and will log false.
+
+```js
+const test = {};
+
+if (test["new"]) {
+  console.log(true);
+} else {
+  console.log(false);
+}
+```
