@@ -37,22 +37,11 @@
 
 Example here: https://en.wikipedia.org/wiki/Database_normalization
 
-1. First Normal Form
-  * Make sure there are no duplicated columns that contain the same data.
-  * Each row contains a primary key.
-  * Each column must have only one value for each row in the table.
-  * If there are columns that contain same type of data, split them up into different tables.
+First Normal Form (1NF): Ensures that each column in a table contains atomic (indivisible) values, meaning there are no repeating groups or arrays. Each cell should have a single value.
 
-2. Second Normal Form
-  * 1NF + all non-key attributes are fully functional dependent on the primary key, not just part of it.
-  * Further breaking into multiple tables.
+Second Normal Form (2NF): Extends 1NF by ensuring that all columns in a table that are not part of the primary key must depend on the entire primary key, not just a part of it. This removes partial dependencies.
 
-3. Third Normal Form
-  * No 'transitive dependencies'.  Make sure there are not any columns that rely on another column that is NOT the PK.
-    * ie: if there is a column that is relying on another column that is not the pk, we should isolate it into another table.
-
-4. Fourth Normal Form
-  * Get rid of Many-to-Many relationships by introducing a 'join' table
+Third Normal Form (3NF): Builds upon 2NF by ensuring that there are no transitive dependencies. In other words, no non-primary key column should depend on another non-primary key column.
 
 ## SQL
 
