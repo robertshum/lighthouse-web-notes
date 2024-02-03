@@ -115,3 +115,51 @@ useContext is great for handling global states like 'themes', 'user info' and an
 
 * Components that consume the context is tied to it, making that component harder to re-use elsewhere.
 * Could be bad for performance if the tree is deeply nested.  It involves lookup for the closest provider everytime the component renders.
+
+Composition is an alternative to pass state information without prop drilling, or useContext.
+
+example:
+
+```javascript
+function App() {
+  const [user, setState] = useState({ name: "Steve" });
+  return (
+    <div>
+      <Navbar />
+      <MainPage>
+        <Content>
+          <Message user={user} />
+        </Content>
+      </MainPage>
+    </div>
+  );
+}
+export default App;
+```
+
+Notice we don't have to pass state into mainpage, then mainpage receive the prop, passes it to content, so on and so forth.  The components can pass in whatever is received as props from the parents, as children.
+
+```javascript
+function Navbar() {
+  return <nav style={{ background: "#10ADDE", color: "#fff" }}>Demo App</nav>;
+}
+
+function MainPage({ children }) {
+  return (
+    <div>
+      <h3>Main Page</h3>
+      {children}
+    </div>
+  );
+}
+
+function Content({ children }) {
+  return <div>{children}</div>;
+}
+
+function Message({ user }) {
+  return <p>Welcome {user.name} :)</p>;
+}
+```
+
+React docs on composition: https://legacy.reactjs.org/docs/composition-vs-inheritance.html
