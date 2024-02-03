@@ -109,3 +109,9 @@ useEffect(() => {...}, []) //    empty dependancy == only run this effect on the
 useEffect(() => {...}, [val]) // dependancies  == when val changes, run this effect, if any other state changes, do not run this effect
 ```
 
+## UseContext vs. Composition
+
+useContext is great for handling global states like 'themes', 'user info' and anything that needs to be shared across all components.  However, we shouldn't use this every time because:
+
+* Components that consume the context is tied to it, making that component harder to re-use elsewhere.
+* Could be bad for performance if the tree is deeply nested.  It involves lookup for the closest provider everytime the component renders.
