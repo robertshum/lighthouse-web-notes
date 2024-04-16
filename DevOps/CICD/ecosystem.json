@@ -1,0 +1,15 @@
+{
+  "apps": [
+    {
+      "name": "a-paint-company-api",
+      "script": "npm",
+      "args": "start",
+      "watch": false,
+      "out_file": "/home/ubuntu/a-paint-company.out.log",
+      "err_file": "/home/ubuntu/a-paint-company.err.log",
+      "merge_logs": true,
+      "instances": 1,
+      "exec_mode": "cluster"
+    }
+  ]
+}
