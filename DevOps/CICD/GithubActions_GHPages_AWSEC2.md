@@ -26,7 +26,7 @@
    2. Go to repo > settings > pages
    3. Source = GitHub Actions
    4. Static HTML > Configure (Configure Github Actions.)
-   5. Either create a ```.github/workflows``` folder, then place a workflow .yml file inside (see static.yml), or just paste and configure the static.yml from previous step.
+   5. Either create a ```.github/workflows``` folder, then place a workflow .yml file inside (see static.yml), or just paste and configure the static.yml from previous step. NOTE! The ```cache-dependency-path``` and ```working-directory``` path can be configured.
    6. Save.
    7. Make another change and push against main, or manually run the workflow.
 7. Pray everything works first try.

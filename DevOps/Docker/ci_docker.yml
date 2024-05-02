@@ -1,0 +1,60 @@
+name: Back-end Docker Push and Deploy
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  dockerBuildPush:
+  
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v4
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      -
+        name: Login to Docker Hub
+        uses: docker/login-action@v3
+        environment:
+        name: github-pages
+        url: ${{ steps.deployment.outputs.page_url }}
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      -
+        name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend
+          push: true
+          tags: user/app:latest
+
+   deployDockerBackend:
+    needs: dockerBuildPush
+    name: 'Deploy Back-end on EC2'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+
+    steps:
+      - name: "Execute remote ssh commands using ssh key"
+        uses: appleboy/ssh-action@v1.0.3
+        env:
+          IMAGE_NAME: "IMAGE_NAME/REPO"
+          TAG: "TAG"
+          HOST_PORT: "5000"
+          CONTAINER_PORT: "3000"
+          CONTAINER_NAME: "a-painting-company-container"
+        with:
+          host: ${{ secrets.AWS_HOST }}
+          username: ${{ secrets.AWS_USER }}
+          key: ${{ secrets.AWS_KEY }}
+          envs: IMAGE_NAME,TAG,HOST_PORT,CONTAINER_PORT,CONTAINER_NAME
+          script: sh pullDeployDocker.sh
