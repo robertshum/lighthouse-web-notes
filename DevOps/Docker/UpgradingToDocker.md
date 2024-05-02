@@ -31,7 +31,7 @@
 3. Test run the docker image: ```docker run -d -p 5000:8080 --name CONTAINER_NAME IMAGE_NAME```.
 4. When satisfied, create a repo on DockerHub:
    1. Login to dockerhub, go to Repo.
-   2. Create a repo, fill out details (I usually keep name and repo name the same).
+   2. Create a repo, fill out details (I usually keep the app and repo name the same).
 5. Tag image with your docker USERNAME and REPO name: ```docker tag IMAGE_NAME USER_NAME/REPO:TAG```.  The tag could be '1.0' or 'latest'.
 6. Login: ```docker login```.
 7. Finally push the image: ```docker push USER_NAME/REPO:TAG```
